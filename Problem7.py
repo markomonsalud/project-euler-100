@@ -1,18 +1,25 @@
 import sys
+import math
 
 
 def nth_prime(n):
     prime = [2]
-    number = 2
+    number = 3
+    is_prime = True
 
     while len(prime) < n:
-        for index, nums in enumerate(prime):
-            if number % nums == 0:
-                number += 1
+        for nums in prime:
+            if nums > math.ceil(math.sqrt(number)):
                 break
-            else:
-                if index == len(prime) - 1:
-                    prime.append(number)
+            if number % nums == 0:
+                is_prime = False
+                break
+
+        if is_prime:
+            prime.append(number)
+        is_prime = True
+
+        number += 2
 
     return prime[-1]
 
